@@ -23,7 +23,7 @@ class UserFactory extends Factory
             'name' =>  fake()->name(),
             'last_name' => fake()->name(),
             'email' => fake()->email(),
-            'piso' => strval(fake()->randomDigit()) . Str::random(1),
+            'floor' => strval(fake()->randomDigit()) . Str::random(1),
             'password' => fake()->password(),
             'is_admin' =>"1",
             'image' =>"undefined"

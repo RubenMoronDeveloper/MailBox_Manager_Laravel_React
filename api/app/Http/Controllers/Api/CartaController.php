@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Carta;
+use App\Models\Mail;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -14,11 +14,11 @@ class CartaController extends Controller
      */
     public function index()
     {
-       $cartas = Carta::all();
+       $cartas = Mail::all();
        return $cartas;
     }
     public function listById(string $id){
-        $cartas = Carta::where('id_piso',$id)->get();
+        $cartas = Mail::where('id_piso',$id)->get();
         return  response ([
             "status" => 1,
             "msg" => "listado de cartas",
@@ -28,7 +28,7 @@ class CartaController extends Controller
 
     public function listCarta(){
         $user_id = auth()->user()->id;
-        $cartas = Carta::where("id_piso", $user_id)->get();
+        $cartas = Mail::where("id_piso", $user_id)->get();
 
         return response([
             "status" =>1,
@@ -39,11 +39,11 @@ class CartaController extends Controller
     public function createCarta(Request $request)
     {
         $request->validate([
-            "remitente" => "required",
+            "mail_sender" => "required",
 
         ]);
         $user_id = auth()->user()->id;
-        $carta = new Carta();
+        $carta = new Mail();
         $carta->id_piso = $user_id;
         $carta->remitente = $request->remitente;
         $carta->contenido = $request->contenido;
@@ -58,7 +58,7 @@ class CartaController extends Controller
      */
     public function show(string $id)
     {
-        $carta =  Carta::find($id);
+        $carta =  Mail::find($id);
         return $carta;
     }
 
@@ -67,7 +67,7 @@ class CartaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $carta = Carta::findOrFail($request->id);
+        $carta = Mail::findOrFail($request->id);
         $carta->remitente = $request->remitente;
         $carta->contenido = $request->contenido;
         $carta->id_piso = $request->id_piso;
@@ -79,7 +79,7 @@ class CartaController extends Controller
      */
     public function destroy(string $id)
     {
-        Carta::destroy($id);
+        Mail::destroy($id);
         return response([
             "status" => 1,
             "msg" => "Carta eliminada correctamente",
@@ -87,7 +87,7 @@ class CartaController extends Controller
     }
     public function store(Request $request)
     {
-        $carta = new Carta();
+        $carta = new Mail();
         $carta->remitente = $request->remitente;
         $carta->contenido = $request->contenido;
         $carta->id_piso = $request->id_piso;

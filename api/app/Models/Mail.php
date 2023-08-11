@@ -9,8 +9,8 @@ use Laravel\Sanctum\HasApiTokens;
 class Mail extends Model
 {
     use HasFactory, HasApiTokens;
-    protected $table = 'cartas';
-    protected $fillable = ['remitente','contenido','piso_id'];
+    protected $table = 'mails';
+    protected $fillable = ['mail_sender','content','id_floor'];
 
 
 }

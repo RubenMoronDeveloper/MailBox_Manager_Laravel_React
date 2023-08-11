@@ -16,10 +16,12 @@ class MailFactory extends Factory
      */
     public function definition(): array
     {
+        $id_floor = fake()->numberBetween(1,14);
+
         return [
-            'remitente' =>  fake()->name(),
-            'contenido' => fake()->text(),
-            'id_piso' => fake()->numberBetween(14,18),
+            'mail_sender' =>  fake()->name(),
+            'content' => fake()->text(),
+            'id_floor' => fake()->numberBetween(1,14),
         ];
     }
 }
