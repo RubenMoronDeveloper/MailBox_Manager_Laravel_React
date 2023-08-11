@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 
-class Carta extends Model
+class Mail extends Model
 {
     use HasFactory, HasApiTokens;
     protected $table = 'cartas';
