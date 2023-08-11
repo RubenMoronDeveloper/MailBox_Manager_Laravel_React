@@ -1,12 +1,10 @@
 <?php
 
 namespace Database\Seeders;
+use App\Models\User;
 
-use DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\User;
-use Str;
 
 class UserSeeder extends Seeder
 {
@@ -16,7 +14,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::factory()
-            ->count(10)
-            ->create();
+        ->count(10)
+        ->create();
     }
 }
