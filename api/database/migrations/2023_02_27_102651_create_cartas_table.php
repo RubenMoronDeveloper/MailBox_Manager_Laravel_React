@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cartas', function (Blueprint $table) {
+        Schema::create('mails', function (Blueprint $table) {
             $table->id();
-            $table->string('remitente');
-            $table->string('contenido', 1000);
-            $table->unsignedBigInteger('id_piso');
+            $table->string('mail_sender');
+            $table->string('content', 1000);
+            $table->unsignedBigInteger('id_floor');
             $table->timestamps();
-            $table->foreign('id_piso')->references('id')
+            $table->foreign('id_floor')->references('id')
             ->on('users')
             ->onDelete('cascade')
             ->onUpdate('cascade');
@@ -29,7 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cartas');
+        Schema::dropIfExists('mails');
     }
 };
 

@@ -18,7 +18,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
-        'piso',
+        'floor',
         'is_admin',
         'image'
     ];

@@ -23,7 +23,7 @@ class UserController extends Controller
             'last_name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
-            'piso' => 'required',
+            'floor' => 'required',
             'is_admin' => 'required',
             'image' => '',
         ]);

@@ -17,12 +17,13 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+
         return [
 
             'name' =>  fake()->name(),
             'last_name' => fake()->name(),
             'email' => fake()->email(),
-            'piso' => strval(fake()->randomDigit()) . Str::random(1),
+            'floor' => strval(fake()->randomDigit()) . Str::random(1),
             'password' => fake()->password(),
             'is_admin' =>"1",
             'image' =>"undefined"
