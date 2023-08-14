@@ -14,18 +14,17 @@ import default_profile_image from "./../img/default_profile_image.png";
 const endpoint = "http://localhost:8000/api";
 const ShowVecinos = () => {
   const navigate = useNavigate();
-  const [vecinos, setVecinos] = useState([]);
+  const [neighbors, setVecinos] = useState([]);
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const authHeader = useAuthHeader();
 
   useEffect(() => {
-    const getAllVecinos = async () => {
+    const getAllNeighbors = async () => {
       const response = await axios.get(`${endpoint}/index`);
       setVecinos(response.data);
-      console.log(response);
     };
-    getAllVecinos();
+    getAllNeighbors();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -33,11 +32,11 @@ const ShowVecinos = () => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "¡Parece que no tienes permisos para entrar a este buzon! ",
+      text: "You don't seem to have permissions to enter this mailbox! ",
     });
   };
 
-  const accederBuzon = async (e) => {
+  const accessMailboxHandler = async (e) => {
     const auth = { headers: { Authorization: authHeader() } };
 
     try {
@@ -54,10 +53,10 @@ const ShowVecinos = () => {
     <div className="alinear">
       <div class="hero">
         <div class="hero-text">
-          <h1>COMUNIDAD VIVIENDAS</h1>
+          <h1>HOUSING COMMUNITY</h1>
           <h3>EL RUEDO</h3>
           <Link to={`/login`}>
-            <i className="text-white">Iniciar sesion</i>
+            <i className="text-white">Log in</i>
           </Link>
         </div>
       </div>
@@ -74,24 +73,24 @@ const ShowVecinos = () => {
         <TextField
           fullWidth
           id="input-with-sx"
-          label="Buscar por nombre"
+          label="Search by name"
           variant="standard"
           onChange={(e) => setQuery(e.target.value)}
         />
       </Box>
       <ul className="cards">
-        {vecinos
-          .filter((vecino) => vecino.name.toLowerCase().includes(query))
-          .map((vecino) => (
+        {neighbors
+          .filter((neighbor) => neighbor.name.toLowerCase().includes(query))
+          .map((neighbor) => (
             <div
-              key={vecino.id}
+              key={neighbor.id}
               className="card text-center bg-dark animate__animated animate__fadeInUp"
             >
               <div className="card">
                 <img
                   src={
-                    vecino.image != "undefined"
-                      ? "http://localhost:8000/storage/" + vecino.image
+                    neighbor.image !== "undefined"
+                      ? "http://localhost:8000/storage/" + neighbor.image
                       : default_profile_image
                   }
                   className="card__image"
@@ -105,29 +104,29 @@ const ShowVecinos = () => {
                     <img
                       className="card__thumb"
                       src={
-                        vecino.image != "undefined"
-                          ? "http://localhost:8000/storage/" + vecino.image
+                        neighbor.image !== "undefined"
+                          ? "http://localhost:8000/storage/" + neighbor.image
                           : default_profile_image
                       }
                       alt=""
                     />
                     <div className="card__header-text">
-                      <h3 className="card__title">{vecino.name}</h3>
-                      <span className="card__status">Piso {vecino.piso}</span>
-                      <Link to={`/createCarta/${vecino.id}`}>
+                      <h3 className="card__title">{neighbor.name}</h3>
+                      <span className="card__status">Floor {neighbor.floor}</span>
+                      <Link to={`/createCarta/${neighbor.id}`}>
                         <i className="fa-regular fa-envelope fa-2x card__mailbox"></i>
                       </Link>
                     </div>
                   </div>
                   <div className="containerButt">
                     <span
-                      value={vecino.id}
-                      onClick={() => accederBuzon(vecino.id)}
+                      value={neighbor.id}
+                      onClick={() => accessMailboxHandler(neighbor.id)}
                       className="button"
                     >
                       <div className="button__line"></div>
                       <div className="button__line"></div>
-                      <span className="button__text">ENTRAR</span>
+                      <span className="button__text">ENTER</span>
                       <div className="button__drow1"></div>
                       <div className="button__drow2"></div>
                     </span>

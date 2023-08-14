@@ -58,7 +58,6 @@ const LoginVecino = () => {
         email: email,
         password: password,
       });
-      console.log(response);
       signIn({
         token: response.data.access_token,
         expiresIn: 12000,
@@ -68,7 +67,6 @@ const LoginVecino = () => {
       navigate("/");
     } catch (err) {
       const response = err.response;
-      console.log(response);
       if (response && response.status === 422) {
         setError(response.data.errors);
         console.log("error" + error);

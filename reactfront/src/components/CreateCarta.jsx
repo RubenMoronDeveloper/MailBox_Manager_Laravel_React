@@ -53,9 +53,9 @@ const CreateCarta = () => {
     e.preventDefault();
     
     await axios.post(endpointCarta, {
-      remitente: remitente,
-      contenido: contenido,
-      id_piso: id,
+      mail_sender: remitente,
+      content: contenido,
+      id_floor: id,
     });
     navigate("/");
   };
@@ -63,7 +63,6 @@ const CreateCarta = () => {
   useEffect(() => {
     const getVecinoById = async () => {
       const response = await axios.get(`${endpoint}${id}`);
-      console.log(response.data);
       setNombreVecino(response.data.name);
     };
     getVecinoById();
@@ -86,7 +85,7 @@ const CreateCarta = () => {
           <SendIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Enviar mensaje a {nombreVecino}
+          Send mail to {nombreVecino}
         </Typography>
         <Box component="form" onSubmit={store} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -115,7 +114,7 @@ const CreateCarta = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Enviar
+            Submit
           </Button>
         </Box>
       </Box>

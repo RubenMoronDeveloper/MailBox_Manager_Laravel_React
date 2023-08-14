@@ -9,7 +9,7 @@ import { Box } from "@mui/material";
 const endpoint = "http://localhost:8000/api";
 
 const AdminVecinos = () => {
-  const [vecinos, setVecinos] = useState([]);
+  const [neighbors, setNeighbors] = useState([]);
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const AdminVecinos = () => {
   }, []);
   const getAllVecinos = async () => {
     const response = await axios.get(`${endpoint}/index`);
-    setVecinos(response.data);
+    setNeighbors(response.data);
   };
   const isAdminCheck = async (e) => {
     const auth = { headers: { Authorization: authHeader() } };
@@ -46,18 +46,22 @@ const AdminVecinos = () => {
   };
   const confirmDeleting = (id) => {
     Swal.fire({
-      title: "¿Estas seguro?",
-      text: "¡No podras rehacer esta acción!",
+      title: "Are you sure about it?",
+      text: "You cannot redo this action!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Si, estoy seguro ",
-      cancelButtonText: 'Cancelar'
+      confirmButtonText: "Yes, I'm sure",
+      cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
         deleteVecino(id);
-        Swal.fire("¡Eliminado!", "Este registro ha sido eliminado de la base de datos.", "success");
+        Swal.fire(
+          "Deleted!",
+          "This record has been deleted from the database.",
+          "success"
+        );
       }
     });
   };
@@ -90,15 +94,15 @@ const AdminVecinos = () => {
         <thead>
           <tr>
             <th>Id</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Piso</th>
+            <th>Name</th>
+            <th>Last name</th>
+            <th>Floor</th>
             <th>Mail</th>
-            <th>Editar / Borrar</th>
+            <th>Edit / Delete</th>
           </tr>
         </thead>
         <tbody>
-          {vecinos
+          {neighbors
             .filter((vecino) => vecino.name.toLowerCase().includes(query))
             .map((vecino) => (
               <tr key={vecino.id}>

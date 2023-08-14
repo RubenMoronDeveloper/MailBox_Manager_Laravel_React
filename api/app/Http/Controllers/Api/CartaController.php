@@ -14,26 +14,26 @@ class CartaController extends Controller
      */
     public function index()
     {
-       $cartas = Mail::all();
-       return $cartas;
+       $mails = Mail::all();
+       return $mails;
     }
     public function listById(string $id){
-        $cartas = Mail::where('id_piso',$id)->get();
+        $mails = Mail::where('id_floor',$id)->get();
         return  response ([
             "status" => 1,
-            "msg" => "listado de cartas",
-            "cartas" =>$cartas
+            "msg" => "Mail list",
+            "cartas" =>$mails
         ]);
     }
 
     public function listCarta(){
         $user_id = auth()->user()->id;
-        $cartas = Mail::where("id_piso", $user_id)->get();
+        $mails = Mail::where("id_piso", $user_id)->get();
 
         return response([
             "status" =>1,
-            "msg" =>"Listado de blogs",
-            "data" =>$cartas
+            "msg" =>"Blog list",
+            "data" =>$mails
         ]);
     }
     public function createCarta(Request $request)
@@ -43,14 +43,14 @@ class CartaController extends Controller
 
         ]);
         $user_id = auth()->user()->id;
-        $carta = new Mail();
-        $carta->id_piso = $user_id;
-        $carta->remitente = $request->remitente;
-        $carta->contenido = $request->contenido;
-        $carta->save();
+        $mail = new Mail();
+        $mail->id_piso = $user_id;
+        $mail->mail_sender = $request->mail_sender;
+        $mail->content = $request->content;
+        $mail->save();
         return response()->json([
             "status" => 2,
-            "msg" => "Carta creada correctamente",
+            "msg" => "Carta created succesfully",
         ]);
     }
     /**
@@ -58,8 +58,8 @@ class CartaController extends Controller
      */
     public function show(string $id)
     {
-        $carta =  Mail::find($id);
-        return $carta;
+        $mail =  Mail::find($id);
+        return $mail;
     }
 
     /**
@@ -67,12 +67,11 @@ class CartaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $carta = Mail::findOrFail($request->id);
-        $carta->remitente = $request->remitente;
-        $carta->contenido = $request->contenido;
-        $carta->id_piso = $request->id_piso;
-        $carta->save();
-
+        $mail = Mail::findOrFail($request->id);
+        $mail->mail_sender = $request->mail_sender;
+        $mail->content = $request->content;
+        $mail->id_floor = $request->id_floor;
+        $mail->save();
     }
     /**
      * Remove the specified resource from storage.
@@ -87,26 +86,13 @@ class CartaController extends Controller
     }
     public function store(Request $request)
     {
-        $carta = new Mail();
-        $carta->remitente = $request->remitente;
-        $carta->contenido = $request->contenido;
-        $carta->id_piso = $request->id_piso;
+        echo $request;
+        $mail = new Mail();
+        $mail->mail_sender = $request->mail_sender;
+        $mail->content = $request->content;
+        $mail->id_floor = $request->id_floor;
 
-        $carta->save();
+        $mail->save();
     }
 }
 
-/* $request->validate([
-    "remitente" => "required",
-    "contenido" => "required"
-
-]);
-$user_id = auth()->user()->id;
-
-$carta = new Carta();
-$carta->id_piso = $user_id;
-$carta->remitente = $request->remitente;
-$carta->contenido = $request->contenido;
-
-
-$carta->save(); */
