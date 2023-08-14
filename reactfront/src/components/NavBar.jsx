@@ -17,14 +17,14 @@ const NavBar = () => {
     });
   };
 
-  function isAdminHandler() {
+  const isAdminHandler = () => {
     if (auth() !== null && auth().is_admin === "0") {
       navigate("/admin");
     } else {
       showError();
     }
   }
-  function signOutHandler() {
+  const signOutHandler = () => {
     signOut();
     localStorage.removeItem("ACCESS_TOKEN");
   }
