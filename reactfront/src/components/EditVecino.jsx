@@ -50,7 +50,7 @@ const EditVecino = () => {
     setImage(e.target.files[0]);
   };
 
-  const update = async (e) => {
+  const updateNeighbor = async (e) => {
     let isAdmin = "";
     e.preventDefault();
     if (document.getElementById("isAdmin").checked) {
@@ -121,7 +121,7 @@ const EditVecino = () => {
           <Typography component="h1" variant="h5">
             Register
           </Typography>
-          <Box component="form" onSubmit={update} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={updateNeighbor} noValidate sx={{ mt: 1 }}>
             <TextField
               value={email}
               onChange={(e) => {

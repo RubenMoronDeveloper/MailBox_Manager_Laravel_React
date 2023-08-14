@@ -16,15 +16,15 @@ const AdminVecinos = () => {
   const authHeader = useAuthHeader();
 
   useEffect(() => {
-    isAdminCheck();
-    getAllVecinos();
+    isAdminHandler();
+    getAllNeighbors();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const getAllVecinos = async () => {
+  const getAllNeighbors = async () => {
     const response = await axios.get(`${endpoint}/index`);
     setNeighbors(response.data);
   };
-  const isAdminCheck = async (e) => {
+  const isAdminHandler = async (e) => {
     const auth = { headers: { Authorization: authHeader() } };
     const response = await axios.get(`${endpoint}/user-profile/`, auth);
     if (response.data.data.is_admin.toString() !== "0") {
@@ -34,17 +34,17 @@ const AdminVecinos = () => {
       navigate("/");
     }
   };
-  const deleteVecino = async (id) => {
+  const deleteNeighborHandler = async (id) => {
     try {
       await axios.delete(`${endpoint}/destroy/${id}`);
-      getAllVecinos();
+      getAllNeighbors();
     } catch (err) {
       if (err && err instanceof AxiosError) setError(err.response?.data.msg);
       else if (err && err instanceof Error) setError(err.message);
       console.log("Error : ", error);
     }
   };
-  const confirmDeleting = (id) => {
+  const swalModalConfirmDeletingHandler = (id) => {
     Swal.fire({
       title: "Are you sure about it?",
       text: "You cannot redo this action!",
@@ -56,7 +56,7 @@ const AdminVecinos = () => {
       cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteVecino(id);
+        deleteNeighborHandler(id);
         Swal.fire(
           "Deleted!",
           "This record has been deleted from the database.",
@@ -120,7 +120,7 @@ const AdminVecinos = () => {
                   </Link>
 
                   <button
-                    onClick={() => confirmDeleting(vecino.id)}
+                    onClick={() => swalModalConfirmDeletingHandler(vecino.id)}
                     className="btn btn-danger"
                   >
                     <i className="fa-solid fa-trash"></i>

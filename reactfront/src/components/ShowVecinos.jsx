@@ -28,7 +28,7 @@ const ShowVecinos = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const showError = () => {
+  const fireSwalError = () => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
@@ -42,10 +42,10 @@ const ShowVecinos = () => {
     try {
       const response = await axios.get(`${endpoint}/user-profile/`, auth);
       response.data.data.id !== e
-        ? showError()
+        ? fireSwalError()
         : navigate(`/VecinoCartas/${e}`);
     } catch (err) {
-      showError();
+      fireSwalError();
       setError("Debes iniciar sesion para poder acceder al buzon");
     }
   };

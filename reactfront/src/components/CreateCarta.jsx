@@ -19,8 +19,8 @@ import { useForm } from "react-hook-form";
 import SendIcon from '@mui/icons-material/Send';
 import { useAuthUser } from "react-auth-kit";
 
-const endpoint = "http://localhost:8000/api/show/";
-const endpointCarta = "http://localhost:8000/api/carta/";
+const endpoint = "http://localhost:8000/api";
+const endpointCarta = "http://localhost:8000/api";
 
 
 
@@ -43,18 +43,19 @@ function Copyright(props) {
 }
 
 const CreateCarta = () => {
-  const [remitente, setRemitente] = useState("");
-  const [contenido, setContenido] = useState("");
-  const [nombreVecino, setNombreVecino] = useState("");
+  const [mailSender, setMailSender] = useState("");
+  const [content, setContent] = useState("");
+  const [name, setName] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
   const auth = useAuthUser();
+  
   const store = async (e) => {
     e.preventDefault();
     
-    await axios.post(endpointCarta, {
-      mail_sender: remitente,
-      content: contenido,
+    await axios.post(`${endpoint}/carta/`, {
+      mail_sender: mailSender,
+      content: content,
       id_floor: id,
     });
     navigate("/");
@@ -62,11 +63,11 @@ const CreateCarta = () => {
 
   useEffect(() => {
     const getVecinoById = async () => {
-      const response = await axios.get(`${endpoint}${id}`);
-      setNombreVecino(response.data.name);
+      const response = await axios.get(`${endpoint}/show/${id}`);
+      setName(response.data.name);
     };
     getVecinoById();
-    setRemitente(auth() && auth().name ? auth().name : '')
+    setMailSender(auth() && auth().name ? auth().name : '')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -85,12 +86,12 @@ const CreateCarta = () => {
           <SendIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Send mail to {nombreVecino}
+          Send mail to {name}
         </Typography>
         <Box component="form" onSubmit={store} noValidate sx={{ mt: 1 }}>
           <TextField
-            value={remitente}
-            onChange={(e) => setRemitente(e.target.value)}
+            value={mailSender}
+            onChange={(e) => setMailSender(e.target.value)}
             margin="normal"
             required
             fullWidth
@@ -105,7 +106,7 @@ const CreateCarta = () => {
             multiline
             rows={8}
             maxRows={8}
-            onChange={(e) => setContenido(e.target.value)}
+            onChange={(e) => setContent(e.target.value)}
             fullWidth
           />
           <Button
@@ -124,3 +125,4 @@ const CreateCarta = () => {
 };
 
 export default CreateCarta;
+ 

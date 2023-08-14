@@ -17,14 +17,14 @@ const NavBar = () => {
     });
   };
 
-  function isAdmin() {
+  function isAdminHandler() {
     if (auth() !== null && auth().is_admin === "0") {
       navigate("/admin");
     } else {
       showError();
     }
   }
-  function SignOutFunct() {
+  function signOutHandler() {
     signOut();
     localStorage.removeItem("ACCESS_TOKEN");
   }
@@ -56,7 +56,7 @@ const NavBar = () => {
               <span
                 style={{ cursor: "pointer" }}
                 className="nav-link pe-auto"
-                onClick={isAdmin}
+                onClick={isAdminHandler}
               >
                 {" "}
                 Admin{" "}
@@ -75,7 +75,7 @@ const NavBar = () => {
               </Link>
             </li> */}
             <li className="nav-item">
-              <Link to="/" className="nav-link" onClick={SignOutFunct}>
+              <Link to="/" className="nav-link" onClick={signOutHandler}>
                 {" "}
                 Sign Out{" "}
               </Link>

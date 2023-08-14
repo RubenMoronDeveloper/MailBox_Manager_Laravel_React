@@ -18,19 +18,19 @@ const VecinoCartas = () => {
   const authHeader = useAuthHeader();
 
   useEffect(() => {
-    getCartasById();
-    getVecinoById();
+    getMailsById();
+    getNeighborById();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getVecinoById = async () => {
+  const getNeighborById = async () => {
     const response = await axios.get(`${endpoint}/show/${id}`);
     setNombre(response.data.name);
     setLastName(response.data.last_name);
     setFloor(response.data.floor);
     setImage(response.data.image);
   };
-  const getCartasById = async () => {
+  const getMailsById = async () => {
     const response = await axios
       .get(`${endpoint}/cartaList/${id}`)
       .catch((error) => {
@@ -39,15 +39,15 @@ const VecinoCartas = () => {
       });
     setMails(response.data.cartas);
   };
-  const deleteCarta = async (id) => {
+  const deleteMailHandler = async (id) => {
     await axios.delete(`${endpoint}/carta/${id}`);
-    getCartasById();
+    getMailsById();
   };
-  const verCarta = async (carta) => {
+  const showMailHandler = async (carta) => {
     setMailContent(carta.content);
-    getCartasById();
+    getMailsById();
   };
-  const confirmDeleting = (id) => {
+  const swalModalConfirmDeletingHandler = (id) => {
     Swal.fire({
       title: "Are you sure about it?",
       text: "You cannot redo this action!",
@@ -59,7 +59,7 @@ const VecinoCartas = () => {
       cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteCarta(id);
+        deleteMailHandler(id);
         Swal.fire(
           "Deleted!",
           "This record has been deleted from the database.",
@@ -114,13 +114,13 @@ const VecinoCartas = () => {
                       <td>{mail.mail_sender}</td>
                       <td>
                         <button
-                          onClick={() => verCarta(mail)}
+                          onClick={() => showMailHandler(mail)}
                           className="btn border-t-cyan-600"
                         >
                           <i className="fa-solid  fa-eye"></i>
                         </button>
                         <button
-                          onClick={() => confirmDeleting(mail.id)}
+                          onClick={() => swalModalConfirmDeletingHandler(mail.id)}
                           className="btn btn-danger"
                         >
                           <i className="fa-solid fa-trash"></i>
