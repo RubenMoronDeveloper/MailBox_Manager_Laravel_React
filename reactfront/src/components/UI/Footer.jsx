@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import location from "./../img/location.png";
+import location from "./../../img/location.png";
 
 export default function Footer() {
   return (

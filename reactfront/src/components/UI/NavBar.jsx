@@ -3,7 +3,7 @@ import { useSignOut, useAuthUser } from "react-auth-kit";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import default_profile_image from "./../img/default_profile_image.png";
+import default_profile_image from "./../../img/default_profile_image.png";
 const NavBar = () => {
   const signOut = useSignOut();
   const auth = useAuthUser();

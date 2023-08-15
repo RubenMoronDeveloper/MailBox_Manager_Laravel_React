@@ -1,16 +1,16 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
+import NavBar from "./components/UI/NavBar";
+import Footer from "./components/UI/Footer";
 //Components
-import AdminVecinos from "./components/AdminVecinos";
-import CreateVecino from "./components/CreateVecino";
-import EditVecino from "./components/EditVecino";
-import ShowVecinos from "./components/ShowVecinos";
-import UserMails from "./components/UserMails";
-import CreateCarta from "./components/CreateCarta";
-import LoginVecino from "./components/LoginVecino";
+import AdminVecinos from "./components/Admin/Index/AdminVecinos";
+import CreateVecino from "./components/Admin/Crud/CreateVecino";
+import EditVecino from "./components/Admin/Crud/EditVecino";
+import ShowVecinos from "./components/Home/ShowVecinos";
+import UserMails from "./components/Mails/UserMails";
+import CreateCarta from "./components/Mails/CreateCarta";
+import LoginVecino from "./components/Login/LoginVecino";
 import { RequireAuth } from "react-auth-kit";
 import axios from "axios";
 import { useEffect } from "react";
