@@ -13,7 +13,7 @@ const NavBar = () => {
     Swal.fire({
       icon: "warning",
       title: "Oops...",
-      text: "Solo los administradores pueden acceder a la zona de administracion!",
+      text: "Only administrators can access the administration area!",
     });
   };
 

@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 const endpoint = "http://localhost:8000/api";
 
 const VecinoCartas = () => {
-  const [nombre, setNombre] = useState("");
+  const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [floor, setFloor] = useState("");
   const [mails, setMails] = useState([]);
@@ -25,7 +25,7 @@ const VecinoCartas = () => {
 
   const getNeighborById = async () => {
     const response = await axios.get(`${endpoint}/show/${id}`);
-    setNombre(response.data.name);
+    setName(response.data.name);
     setLastName(response.data.last_name);
     setFloor(response.data.floor);
     setImage(response.data.image);
@@ -82,7 +82,7 @@ const VecinoCartas = () => {
         }}
       >
         <div className="hero-text">
-          <h1>{nombre}</h1>
+          <h1>{name}</h1>
           <p>Last name : {lastName}</p>
           <p>Floor : {floor}</p>
         </div>

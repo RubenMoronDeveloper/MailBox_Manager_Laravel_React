@@ -5,7 +5,6 @@ import { useAuthHeader } from "react-auth-kit";
 import Swal from "sweetalert2";
 import "./ShowVecinos.css";
 import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box } from "@mui/material";
 import default_profile_image from "./../img/default_profile_image.png";
@@ -14,7 +13,7 @@ import default_profile_image from "./../img/default_profile_image.png";
 const endpoint = "http://localhost:8000/api";
 const ShowVecinos = () => {
   const navigate = useNavigate();
-  const [neighbors, setVecinos] = useState([]);
+  const [neighbors, setNeighbors] = useState([]);
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const authHeader = useAuthHeader();
@@ -22,7 +21,7 @@ const ShowVecinos = () => {
   useEffect(() => {
     const getAllNeighbors = async () => {
       const response = await axios.get(`${endpoint}/index`);
-      setVecinos(response.data);
+      setNeighbors(response.data);
     };
     getAllNeighbors();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,7 +45,7 @@ const ShowVecinos = () => {
         : navigate(`/VecinoCartas/${e}`);
     } catch (err) {
       fireSwalError();
-      setError("Debes iniciar sesion para poder acceder al buzon");
+      setError("You must be logged in to access the mailbox.");
     }
   };
   return (

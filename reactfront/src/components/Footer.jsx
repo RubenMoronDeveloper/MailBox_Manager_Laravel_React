@@ -1,7 +1,5 @@
 import * as React from "react";
 import Container from "@mui/material/Container";
-import { Image } from "@material-ui/icons";
-
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
