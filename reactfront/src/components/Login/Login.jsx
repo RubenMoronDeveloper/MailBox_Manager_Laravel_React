@@ -38,7 +38,7 @@ function Copyright(props) {
 }
 const defaultTheme = createTheme();
 
-const LoginVecino = () => {
+const Login = () => {
   const signIn = useSignIn();
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
@@ -168,4 +168,4 @@ const LoginVecino = () => {
   );
 };
 
-export default LoginVecino;
+export default Login;

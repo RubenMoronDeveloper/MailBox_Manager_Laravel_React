@@ -11,7 +11,7 @@ import default_profile_image from "./../../img/default_profile_image.png";
 
 //ENDPOINT
 const endpoint = "http://localhost:8000/api";
-const ShowVecinos = () => {
+const Home = () => {
   const navigate = useNavigate();
   const [neighbors, setNeighbors] = useState([]);
   const [query, setQuery] = useState("");
@@ -139,4 +139,4 @@ const ShowVecinos = () => {
   );
 };
 
-export default ShowVecinos;
+export default Home;

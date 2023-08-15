@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 const endpoint = "http://localhost:8000/api";
 
-const UserMails = () => {
+const ShowUserMails = () => {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [floor, setFloor] = useState("");
@@ -157,4 +157,4 @@ const UserMails = () => {
   );
 };
 
-export default UserMails;
+export default ShowUserMails;
