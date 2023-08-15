@@ -7,7 +7,7 @@ use App\Models\Mail;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\HasApiTokens;
 
-class CartaController extends Controller
+class MailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,13 +22,13 @@ class CartaController extends Controller
         return  response ([
             "status" => 1,
             "msg" => "Mail list",
-            "cartas" =>$mails
+            "mails" =>$mails
         ]);
     }
 
-    public function listCarta(){
+    public function listMail(){
         $user_id = auth()->user()->id;
-        $mails = Mail::where("id_piso", $user_id)->get();
+        $mails = Mail::where("id_floor", $user_id)->get();
 
         return response([
             "status" =>1,
@@ -36,7 +36,7 @@ class CartaController extends Controller
             "data" =>$mails
         ]);
     }
-    public function createCarta(Request $request)
+    public function createMail(Request $request)
     {
         $request->validate([
             "mail_sender" => "required",
@@ -44,13 +44,13 @@ class CartaController extends Controller
         ]);
         $user_id = auth()->user()->id;
         $mail = new Mail();
-        $mail->id_piso = $user_id;
+        $mail->id_floor = $user_id;
         $mail->mail_sender = $request->mail_sender;
         $mail->content = $request->content;
         $mail->save();
         return response()->json([
             "status" => 2,
-            "msg" => "Carta created succesfully",
+            "msg" => "Mail created succesfully",
         ]);
     }
     /**
@@ -81,7 +81,7 @@ class CartaController extends Controller
         Mail::destroy($id);
         return response([
             "status" => 1,
-            "msg" => "Carta eliminada correctamente",
+            "msg" => "Mail eliminada correctamente",
         ]);
     }
     public function store(Request $request)

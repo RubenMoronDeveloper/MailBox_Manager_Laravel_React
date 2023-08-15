@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 const endpoint = "http://localhost:8000/api";
 
-const VecinoCartas = () => {
+const UserMails = () => {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [floor, setFloor] = useState("");
@@ -32,19 +32,18 @@ const VecinoCartas = () => {
   };
   const getMailsById = async () => {
     const response = await axios
-      .get(`${endpoint}/cartaList/${id}`)
+      .get(`${endpoint}/mailList/${id}`)
       .catch((error) => {
         console.error(error);
-        console.log({ response });
       });
-    setMails(response.data.cartas);
+    setMails(response.data.mails);
   };
   const deleteMailHandler = async (id) => {
-    await axios.delete(`${endpoint}/carta/${id}`);
+    await axios.delete(`${endpoint}/mail/${id}`);
     getMailsById();
   };
-  const showMailHandler = async (carta) => {
-    setMailContent(carta.content);
+  const showMailHandler = async (mail) => {
+    setMailContent(mail.content);
     getMailsById();
   };
   const swalModalConfirmDeletingHandler = (id) => {
@@ -158,4 +157,4 @@ const VecinoCartas = () => {
   );
 };
 
-export default VecinoCartas;
+export default UserMails;

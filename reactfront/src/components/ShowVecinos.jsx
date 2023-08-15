@@ -50,8 +50,8 @@ const ShowVecinos = () => {
   };
   return (
     <div className="alinear">
-      <div class="hero">
-        <div class="hero-text">
+      <div className="hero">
+        <div className="hero-text">
           <h1>HOUSING COMMUNITY</h1>
           <h3>EL RUEDO</h3>
           <Link to={`/login`}>

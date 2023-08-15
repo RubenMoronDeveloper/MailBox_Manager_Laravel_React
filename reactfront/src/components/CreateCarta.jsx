@@ -20,7 +20,6 @@ import SendIcon from '@mui/icons-material/Send';
 import { useAuthUser } from "react-auth-kit";
 
 const endpoint = "http://localhost:8000/api";
-const endpointCarta = "http://localhost:8000/api";
 
 
 
@@ -53,7 +52,7 @@ const CreateCarta = () => {
   const store = async (e) => {
     e.preventDefault();
     
-    await axios.post(`${endpoint}/carta/`, {
+    const response  = await axios.post(`${endpoint}/mail`, {
       mail_sender: mailSender,
       content: content,
       id_floor: id,
@@ -105,7 +104,6 @@ const CreateCarta = () => {
             placeholder="Escribe aqui el mensaje"
             multiline
             rows={8}
-            maxRows={8}
             onChange={(e) => setContent(e.target.value)}
             fullWidth
           />

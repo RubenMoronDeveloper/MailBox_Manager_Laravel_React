@@ -109,7 +109,7 @@ const AdminVecinos = () => {
                 <td>{vecino.id}</td>
                 <td>{vecino.name}</td>
                 <td>{vecino.last_name}</td>
-                <td>{vecino.piso}</td>
+                <td>{vecino.floor}</td>
                 <td>{vecino.email}</td>
                 <td>
                   <Link
