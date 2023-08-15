@@ -47,7 +47,7 @@ class UserController extends Controller
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->piso = $request->piso;
+        $user->floor = $request->floor;
         $user->is_admin = $request->is_admin;
 
         $user->save();
@@ -109,7 +109,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
-        $user->piso = $request->piso;
+        $user->floor = $request->floor;
         $user->is_admin = $request->is_admin;
         $user->save();
     }

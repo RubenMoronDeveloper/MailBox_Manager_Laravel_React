@@ -39,7 +39,7 @@ const defaultTheme = createTheme();
 const EditVecino = () => {
   const [name, setName] = useState("");
   const [last_name, setlastName] = useState("");
-  const [piso, setPiso] = useState("");
+  const [floor, setFloor] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const { id } = useParams();
@@ -48,10 +48,9 @@ const EditVecino = () => {
 
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
-    console.log(image);
   };
 
-  const update = async (e) => {
+  const updateNeighbor = async (e) => {
     let isAdmin = "";
     e.preventDefault();
     if (document.getElementById("isAdmin").checked) {
@@ -59,15 +58,19 @@ const EditVecino = () => {
     } else {
       isAdmin = "1";
     }
+    try{
 
-    await axios.put(`${endpoint}${id}`, {
-      name: name,
-      last_name: last_name,
-      piso: piso,
-      email: email,
-      image: image,
-      is_admin: isAdmin,
-    });
+      await axios.put(`${endpoint}${id}`, {
+        name: name,
+        last_name: last_name,
+        email: email,
+        floor: floor,
+        is_admin: isAdmin,
+        image: image,
+      });
+    }catch(err){
+      console.log(err)
+    }
     navigate("/admin"); 
   };
   useEffect(() => {
@@ -76,7 +79,7 @@ const EditVecino = () => {
         const response = await axios.get(`${endpointVecinoId}${id}`);
         setName(response.data.name);
         setlastName(response.data.last_name);
-        setPiso(response.data.piso);
+        setFloor(response.data.floor);
         setEmail(response.data.email);
         setImage(response.data.image);
       } catch (err) {
@@ -118,7 +121,7 @@ const EditVecino = () => {
           <Typography component="h1" variant="h5">
             Register
           </Typography>
-          <Box component="form" onSubmit={update} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={updateNeighbor} noValidate sx={{ mt: 1 }}>
             <TextField
               value={email}
               onChange={(e) => {
@@ -162,16 +165,16 @@ const EditVecino = () => {
             />
             <TextField
               onChange={(e) => {
-                setPiso(e.target.value);
+                setFloor(e.target.value);
               }}
-              value={piso}
+              value={floor}
               margin="normal"
               required
               fullWidth
-              name="piso"
-              label="Piso "
+              name="floor"
+              label="Floor "
               type="text"
-              id="piso"
+              id="floor"
             />
             <Button
               sx={{ textAlign: "left", alignSelf: "flex-start" }}

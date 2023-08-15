@@ -16,7 +16,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useForm } from "react-hook-form";
 
 const endpoint = "http://localhost:8000/api/login";
 
@@ -58,7 +57,6 @@ const LoginVecino = () => {
         email: email,
         password: password,
       });
-      console.log(response);
       signIn({
         token: response.data.access_token,
         expiresIn: 12000,
@@ -68,7 +66,6 @@ const LoginVecino = () => {
       navigate("/");
     } catch (err) {
       const response = err.response;
-      console.log(response);
       if (response && response.status === 422) {
         setError(response.data.errors);
         console.log("error" + error);

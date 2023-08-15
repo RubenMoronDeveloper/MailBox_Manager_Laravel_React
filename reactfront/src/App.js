@@ -8,7 +8,7 @@ import AdminVecinos from "./components/AdminVecinos";
 import CreateVecino from "./components/CreateVecino";
 import EditVecino from "./components/EditVecino";
 import ShowVecinos from "./components/ShowVecinos";
-import VecinoCartas from "./components/VecinoCartas";
+import UserMails from "./components/UserMails";
 import CreateCarta from "./components/CreateCarta";
 import LoginVecino from "./components/LoginVecino";
 import { RequireAuth } from "react-auth-kit";
@@ -33,7 +33,7 @@ function App() {
           <Route path="/create" element={<CreateVecino />}></Route>
           <Route path="/edit/:id" element={<EditVecino />}></Route>
 
-          <Route path="/vecinoCartas/:id" element={<VecinoCartas />}></Route>
+          <Route path="/vecinoCartas/:id" element={<UserMails />}></Route>
           <Route path="/vecinoCartas/:id" element={<checkAuth />}></Route>
           {/* CARTAS */}
           <Route path="/createCarta/:id" element={<CreateCarta />}></Route>

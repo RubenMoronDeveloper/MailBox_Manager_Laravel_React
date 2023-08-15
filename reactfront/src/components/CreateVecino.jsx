@@ -38,7 +38,7 @@ const defaultTheme = createTheme();
 const CreateVecino = () => {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [piso, setPiso] = useState("");
+  const [floor, setFloor] = useState("");
   const [image, setImage] = useState(null);
   const [error, setError] = useState("");
 
@@ -71,7 +71,7 @@ const CreateVecino = () => {
       formData.append("email", email);
       formData.append("password", password);
       formData.append("password_confirmation", passwordConfirmation);
-      formData.append("piso", piso);
+      formData.append("floor", floor);
       formData.append("image", image ? image :  'undefined');
       formData.append("is_admin", isAdmin);
 
@@ -80,7 +80,6 @@ const CreateVecino = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log({ response });
       navigate("/admin");
     } catch (err) {
       const response = err.response;
@@ -220,16 +219,16 @@ const CreateVecino = () => {
             />
             <TextField
               onChange={(e) => {
-                setPiso(e.target.value);
+                setFloor(e.target.value);
               }}
-              value={piso}
+              value={floor}
               margin="normal"
               required
               fullWidth
-              name="piso"
-              label="Piso "
+              name="floor"
+              label="Floor "
               type="text"
-              id="piso"
+              id="floor"
             />
             <Button
               sx={{ textAlign: "left", alignSelf: "flex-start" }}

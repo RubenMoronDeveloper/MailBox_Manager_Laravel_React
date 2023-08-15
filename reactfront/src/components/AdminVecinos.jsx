@@ -9,22 +9,22 @@ import { Box } from "@mui/material";
 const endpoint = "http://localhost:8000/api";
 
 const AdminVecinos = () => {
-  const [vecinos, setVecinos] = useState([]);
+  const [neighbors, setNeighbors] = useState([]);
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const authHeader = useAuthHeader();
 
   useEffect(() => {
-    isAdminCheck();
-    getAllVecinos();
+    isAdminHandler();
+    getAllNeighbors();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const getAllVecinos = async () => {
+  const getAllNeighbors = async () => {
     const response = await axios.get(`${endpoint}/index`);
-    setVecinos(response.data);
+    setNeighbors(response.data);
   };
-  const isAdminCheck = async (e) => {
+  const isAdminHandler = async (e) => {
     const auth = { headers: { Authorization: authHeader() } };
     const response = await axios.get(`${endpoint}/user-profile/`, auth);
     if (response.data.data.is_admin.toString() !== "0") {
@@ -34,30 +34,34 @@ const AdminVecinos = () => {
       navigate("/");
     }
   };
-  const deleteVecino = async (id) => {
+  const deleteNeighborHandler = async (id) => {
     try {
       await axios.delete(`${endpoint}/destroy/${id}`);
-      getAllVecinos();
+      getAllNeighbors();
     } catch (err) {
       if (err && err instanceof AxiosError) setError(err.response?.data.msg);
       else if (err && err instanceof Error) setError(err.message);
       console.log("Error : ", error);
     }
   };
-  const confirmDeleting = (id) => {
+  const swalModalConfirmDeletingHandler = (id) => {
     Swal.fire({
-      title: "¿Estas seguro?",
-      text: "¡No podras rehacer esta acción!",
+      title: "Are you sure about it?",
+      text: "You cannot redo this action!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Si, estoy seguro ",
-      cancelButtonText: 'Cancelar'
+      confirmButtonText: "Yes, I'm sure",
+      cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteVecino(id);
-        Swal.fire("¡Eliminado!", "Este registro ha sido eliminado de la base de datos.", "success");
+        deleteNeighborHandler(id);
+        Swal.fire(
+          "Deleted!",
+          "This record has been deleted from the database.",
+          "success"
+        );
       }
     });
   };
@@ -90,22 +94,22 @@ const AdminVecinos = () => {
         <thead>
           <tr>
             <th>Id</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Piso</th>
+            <th>Name</th>
+            <th>Last name</th>
+            <th>Floor</th>
             <th>Mail</th>
-            <th>Editar / Borrar</th>
+            <th>Edit / Delete</th>
           </tr>
         </thead>
         <tbody>
-          {vecinos
+          {neighbors
             .filter((vecino) => vecino.name.toLowerCase().includes(query))
             .map((vecino) => (
               <tr key={vecino.id}>
                 <td>{vecino.id}</td>
                 <td>{vecino.name}</td>
                 <td>{vecino.last_name}</td>
-                <td>{vecino.piso}</td>
+                <td>{vecino.floor}</td>
                 <td>{vecino.email}</td>
                 <td>
                   <Link
@@ -116,7 +120,7 @@ const AdminVecinos = () => {
                   </Link>
 
                   <button
-                    onClick={() => confirmDeleting(vecino.id)}
+                    onClick={() => swalModalConfirmDeletingHandler(vecino.id)}
                     className="btn btn-danger"
                   >
                     <i className="fa-solid fa-trash"></i>
