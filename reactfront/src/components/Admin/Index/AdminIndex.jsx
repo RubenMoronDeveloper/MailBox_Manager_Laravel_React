@@ -8,7 +8,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Box } from "@mui/material";
 const endpoint = "http://localhost:8000/api";
 
-const AdminVecinos = () => {
+const AdminIndex = () => {
   const [neighbors, setNeighbors] = useState([]);
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
@@ -134,4 +134,4 @@ const AdminVecinos = () => {
   );
 };
 
-export default AdminVecinos;
+export default AdminIndex;
