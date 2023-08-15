@@ -7,7 +7,7 @@ import "./ShowVecinos.css";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import { Box } from "@mui/material";
-import default_profile_image from "./../img/default_profile_image.png";
+import default_profile_image from "./../../img/default_profile_image.png";
 
 //ENDPOINT
 const endpoint = "http://localhost:8000/api";
