@@ -41,7 +41,7 @@ function Copyright(props) {
   );
 }
 
-const CreateCarta = () => {
+const CreateMail = () => {
   const [mailSender, setMailSender] = useState("");
   const [content, setContent] = useState("");
   const [name, setName] = useState("");
@@ -122,5 +122,5 @@ const CreateCarta = () => {
   );
 };
 
-export default CreateCarta;
+export default CreateMail;
  

@@ -35,7 +35,7 @@ function Copyright(props) {
 }
 const defaultTheme = createTheme();
 
-const CreateVecino = () => {
+const CreateUser = () => {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [floor, setFloor] = useState("");
@@ -270,4 +270,4 @@ const CreateVecino = () => {
   );
 };
 
-export default CreateVecino;
+export default CreateUser;
