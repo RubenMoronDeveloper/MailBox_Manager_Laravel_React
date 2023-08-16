@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import default_profile_image from "./../../img/default_profile_image.png";
+import classes from './../Home/NeighborCard.module.css'
 const NavBar = () => {
   const signOut = useSignOut();
   const auth = useAuthUser();
@@ -87,7 +88,7 @@ const NavBar = () => {
             <img
               width="300"
               height="300"
-              className="card__thumb"
+              className={classes["card__thumb"]}
               src={
                 auth().image !== "undefined"
                   ? "http://localhost:8000/storage/" + auth().image

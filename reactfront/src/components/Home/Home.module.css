@@ -1,0 +1,23 @@
+:root {
+    --surface-color: #fff;
+    --curve: 40;
+    /* color type A */
+    --line_color: #555555;
+    --back_color: #FFECF6;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: white;
+}
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 2fr));
+    gap: 2rem;
+    margin: 4rem 5vw;
+    padding: 0;
+    list-style-type: none;
+}
